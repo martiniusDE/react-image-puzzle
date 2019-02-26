@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
-import TouchBackend from 'react-dnd-touch-backend';
+import MultiBackend, { Preview } from 'react-dnd-multi-backend';
+import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'; // or any other pipeline
 import { DragDropContext } from 'react-dnd';
 
 /**
@@ -89,20 +90,28 @@ class Puzzle extends React.Component {
     return squares;
   }
 
+  previewGenerator(itemType, item, style) {
+    return <div class="item-list__item" style={style}>{itemType}</div>;
+  }
+
   render() {
     const { size } = this.props;
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          padding: 0,
-          width: `${size}px`,
-          height: `${size}px`
-        }}>
-        {this.renderSquares()}
-      </div>
+        <div>
+          <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                padding: 0,
+                width: `${size}px`,
+                height: `${size}px`
+              }}>
+            {this.renderSquares()}
+          </div>
+          <Preview generator={this.previewGenerator} />
+        </div>
+
     );
   }
 };
@@ -120,4 +129,4 @@ Puzzle.defaultProps = {
   onDone: () => {},
 };
 
-export default DragDropContext(TouchBackend)(Puzzle);
+export default DragDropContext(MultiBackend(HTML5toTouch))(Puzzle);
