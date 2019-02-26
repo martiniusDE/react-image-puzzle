@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
-import HTML5Backend from 'react-dnd-html5-backend';
+import TouchBackend from 'react-dnd-touch-backend';
 import { DragDropContext } from 'react-dnd';
 
 /**
@@ -120,4 +120,4 @@ Puzzle.defaultProps = {
   onDone: () => {},
 };
 
-export default DragDropContext(HTML5Backend)(Puzzle);
+export default DragDropContext(TouchBackend)(Puzzle);
