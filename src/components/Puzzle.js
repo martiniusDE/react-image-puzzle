@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
-import MultiBackend, { Preview } from 'react-dnd-multi-backend';
-import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'; // or any other pipeline
+import TouchBackend from 'react-dnd-touch-backend';
+import Preview from 'react-dnd-preview';
 import { DragDropContext } from 'react-dnd';
 
 /**
@@ -129,4 +129,4 @@ Puzzle.defaultProps = {
   onDone: () => {},
 };
 
-export default DragDropContext(MultiBackend(HTML5toTouch))(Puzzle);
+export default DragDropContext(TouchBackend)(Puzzle);
